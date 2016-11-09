@@ -13,9 +13,28 @@ Records = React.createClass({
   },
 
   addRecord: function(record) {
-    records = this.state.records.slice();
-    records.push(record);
-    this.setState({records: records})
+    var records;
+
+    records = React.addons.update(this.state.records, {
+      $push: [record]
+    });
+
+    this.setState({
+      records: records
+    });
+  },
+
+  deleteRecord: function(record) {
+    var index, records;
+
+    index = this.state.records.indexOf(record);
+    records = React.addons.update(this.state.records, {
+      $splice: [[index, 1]]
+    });
+
+    this.replaceState({
+      records: records
+    });
   },
 
   credits: function() {
@@ -41,17 +60,6 @@ Records = React.createClass({
 
   balance: function() {
     return this.debits() + this.credits();
-  },
-
-  deleteRecord: function(record) {
-    records = this.state.records.slice();
-    index = records.indexOf(record);
-
-    records.splice(index, 1);
-
-    this.replaceState({
-      records: records
-    });
   },
 
   render: function() {
