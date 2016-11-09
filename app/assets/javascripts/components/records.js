@@ -43,6 +43,17 @@ Records = React.createClass({
     return this.debits() + this.credits();
   },
 
+  deleteRecord: function(record) {
+    records = this.state.records.slice();
+    index = records.indexOf(record);
+
+    records.splice(index, 1);
+
+    this.replaceState({
+      records: records
+    });
+  },
+
   render: function() {
 
     return React.DOM.div({
@@ -81,7 +92,8 @@ Records = React.createClass({
           React.DOM.tr(null,
             React.DOM.th(null, 'Date'),
             React.DOM.th(null, 'Title'),
-            React.DOM.th(null, 'Amount'))),
+            React.DOM.th(null, 'Amount'),
+            React.DOM.th(null, 'Actions'))),
         React.DOM.tbody(null, (function() {
           var i, len, ref, results;
           ref = this.state.records;
@@ -92,7 +104,8 @@ Records = React.createClass({
             var record = ref[i];
             results.push(React.createElement(Record, {
               key: record.id,
-              record: record
+              record: record,
+              handleDeleteRecord: this.deleteRecord
             }))
           }
           return results;

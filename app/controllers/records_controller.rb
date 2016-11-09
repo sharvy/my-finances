@@ -1,4 +1,6 @@
 class RecordsController < ApplicationController
+  before_filter :set_record, only: [:destroy]
+
   def index
     @records = Record.all
   end
@@ -13,7 +15,16 @@ class RecordsController < ApplicationController
     end
   end
 
+  def destroy
+    @record.destroy
+    head :no_content
+  end
+
   private
+
+  def set_record
+    @record = Record.find(params[:id])
+  end
 
   def record_params
     params.require(:record).permit(:title, :amount, :date)
