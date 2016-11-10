@@ -31,7 +31,7 @@ RecordForm = React.createClass({
         React.DOM.input({
           type: 'text',
           className: 'form-control',
-          placeholder: 'Title',
+          placeholder: 'Purpose',
           name: 'title',
           value: this.state.title,
           onChange: this.handleChange

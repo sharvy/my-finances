@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_filter :set_record, only: [:destroy]
+  before_filter :set_record, only: [:update, :destroy]
 
   def index
     @records = Record.all
@@ -9,6 +9,14 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
 
     if @record.save
+      render json: @record
+    else
+      render json: @record.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @record.update(record_params)
       render json: @record
     else
       render json: @record.errors, status: :unprocessable_entity

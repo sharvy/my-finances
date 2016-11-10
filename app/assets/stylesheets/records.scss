@@ -1,3 +1,42 @@
-// Place all the styles related to the Records controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.records {
+
+  .income {
+    background: #18B4ED;
+  }
+
+  .expense {
+    background: #FF6A5B;
+  }
+
+  .balance {
+    background: #60E673;
+  }
+
+  .amount-boxes {
+    .panel {
+      border-radius: 0;
+      .panel-heading {
+        background-color: rgba(0, 0, 0, 0.2);
+        color: white;
+        display: inline-block;
+        border-radius: 15px;
+        padding: 5px 10px;
+        margin: 15px 0 0 15px;
+        text-transform: uppercase;
+      }
+      .panel-body {
+        color: white;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .form-control {
+    margin-right: 5px;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #dddddd;
+  }
+}

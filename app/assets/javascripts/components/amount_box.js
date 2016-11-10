@@ -4,7 +4,7 @@ AmountBox = React.createClass({
       className: 'col-md-4'
     },
       React.DOM.div({
-        className: 'panel panel-' + this.props.type
+        className: 'panel ' + this.props.type
       },
         React.DOM.div({
           className: 'panel-heading'

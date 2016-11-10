@@ -19,7 +19,7 @@ Records = React.createClass({
       $push: [record]
     });
 
-    this.setState({
+    return this.setState({
       records: records
     });
   },
@@ -32,7 +32,20 @@ Records = React.createClass({
       $splice: [[index, 1]]
     });
 
-    this.replaceState({
+    return this.replaceState({
+      records: records
+    });
+  },
+
+  updateRecord: function(record, data) {
+    var index, records;
+
+    index = this.state.records.indexOf(record);
+    records = React.addons.update(this.state.records, {
+      $splice: [[index, 1, data]]
+    });
+
+    return this.replaceState({
       records: records
     });
   },
@@ -65,26 +78,26 @@ Records = React.createClass({
   render: function() {
 
     return React.DOM.div({
-      className: 'records'
+      className: 'records col-md-12'
     },
       React.DOM.h2({
       className: 'title'
-    }, 'Records'),
+    }, 'Monthly Expenses'),
       React.DOM.div({
-        className: 'row'
+        className: 'row amount-boxes'
       },
         React.createElement(AmountBox, {
-          type: 'success',
+          type: 'income',
           amount: this.credits(),
-          text: 'Credit'
+          text: 'Income'
         }),
         React.createElement(AmountBox, {
-          type: 'danger',
+          type: 'expense',
           amount: this.debits(),
-          text: 'Debit'
+          text: 'Expense'
         }),
         React.createElement(AmountBox, {
-          type: 'info',
+          type: 'balance',
           amount: this.balance(),
           text: 'Balance'
         })
@@ -93,31 +106,36 @@ Records = React.createClass({
         handleNewRecord: this.addRecord
       }),
       React.DOM.hr(null),
-      React.DOM.table({
-        className: 'table table-bordered'
+      React.DOM.div({
+        className: 'col-md-8 col-md-offset-2'
       },
-        React.DOM.thead(null,
-          React.DOM.tr(null,
-            React.DOM.th(null, 'Date'),
-            React.DOM.th(null, 'Title'),
-            React.DOM.th(null, 'Amount'),
-            React.DOM.th(null, 'Actions'))),
-        React.DOM.tbody(null, (function() {
-          var i, len, ref, results;
-          ref = this.state.records;
-          len = ref.length;
-          results = [];
+        React.DOM.table({
+            className: 'table table-hover table-condensed'
+          },
+          React.DOM.thead(null,
+            React.DOM.tr(null,
+              React.DOM.th(null, 'Date'),
+              React.DOM.th(null, 'Title'),
+              React.DOM.th(null, 'Amount'),
+              React.DOM.th(null, 'Actions'))),
+          React.DOM.tbody(null, (function() {
+              var i, len, ref, results;
+              ref = this.state.records;
+              len = ref.length;
+              results = [];
 
-          for(i = 0; i < len; i++) {
-            var record = ref[i];
-            results.push(React.createElement(Record, {
-              key: record.id,
-              record: record,
-              handleDeleteRecord: this.deleteRecord
-            }))
-          }
-          return results;
-        }).call(this)
+              for(i = 0; i < len; i++) {
+                var record = ref[i];
+                results.push(React.createElement(Record, {
+                  key: record.id,
+                  record: record,
+                  handleDeleteRecord: this.deleteRecord,
+                  handleEditRecord: this.updateRecord
+                }))
+              }
+              return results;
+            }).call(this)
+          )
         )
       )
     );
