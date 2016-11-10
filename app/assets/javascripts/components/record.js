@@ -63,12 +63,12 @@ Record = React.createClass({
         React.DOM.a({
           className: 'btn btn-default',
           onClick: this.handleToggle
-        }, 'Edit')
-      ),
-      React.DOM.td(null, React.DOM.a({
-        className: 'btn btn-danger',
-        onClick: this.handleDelete
-      }, 'Delete'))
+        }, 'Edit'),
+        React.DOM.a({
+          className: 'btn btn-danger',
+          onClick: this.handleDelete
+        }, 'Delete')
+      )
     )
   },
 
@@ -100,13 +100,11 @@ Record = React.createClass({
       ),
       React.DOM.td(null,
         React.DOM.a({
-          className: 'btn btn-default',
+          className: 'btn btn-info',
           onClick: this.handleEdit
-        }, 'Update')
-      ),
-      React.DOM.td(null,
+        }, 'Update'),
         React.DOM.a({
-          className: 'btn btn-danger',
+          className: 'btn btn-warning',
           onClick: this.handleToggle
         }, 'Cancel')
       )

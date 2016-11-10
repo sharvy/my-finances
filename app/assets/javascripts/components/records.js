@@ -110,7 +110,7 @@ Records = React.createClass({
         className: 'col-md-8 col-md-offset-2'
       },
         React.DOM.table({
-            className: 'table table-hover table-condensed'
+            className: 'table table-hover table-condensed records-table'
           },
           React.DOM.thead(null,
             React.DOM.tr(null,
